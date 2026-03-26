@@ -150,6 +150,15 @@
         .btn-outline:hover { background: var(--white); color: var(--primary); }
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
 
+        /* HERO BOTTOM WAVE */
+        .hero-wave { position: absolute; bottom: -2px; left: 0; width: 100%; z-index: 2; line-height: 0; }
+        .hero-wave svg { display: block; width: 100%; height: 80px; }
+
+        /* WAVE DIVIDERS */
+        .wave-divider { line-height: 0; overflow: hidden; }
+        .wave-divider svg { display: block; width: 100%; height: 60px; }
+        .wave-divider.flip { transform: rotate(180deg); }
+
         /* SECTION TITLES */
         .section-title { text-align: center; margin-bottom: 50px; }
         .section-title h2 { font-size: 2.4rem; font-weight: 800; margin-bottom: 15px; color: var(--primary); }
@@ -159,12 +168,15 @@
         /* SERVICES */
         .services { padding: 100px 0; background: var(--white); }
         .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .service-card { background: var(--white); border-radius: 16px; padding: 40px 30px; text-align: center; box-shadow: 0 5px 30px rgba(27,58,92,0.08); transition: all 0.4s; border: 2px solid transparent; }
+        .service-card { background: var(--white); border-radius: 16px; padding: 40px 30px; text-align: center; box-shadow: 0 5px 30px rgba(27,58,92,0.08); transition: all 0.4s; border: 2px solid transparent; border-top: 4px solid transparent; position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 16px 16px 0 0; }
+        .service-card::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(33,150,243,0.04) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+        .service-card:hover::after { opacity: 1; }
         .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 50px rgba(27,58,92,0.15); border-color: var(--accent); }
-        .service-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 1.8rem; color: var(--white); transition: transform 0.3s; }
+        .service-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 1.8rem; color: var(--white); transition: transform 0.3s; position: relative; z-index: 1; }
         .service-card:hover .service-icon { transform: scale(1.1); }
-        .service-card h3 { font-size: 1.3rem; margin-bottom: 14px; color: var(--primary); }
-        .service-card p { color: #666; line-height: 1.7; font-size: 0.95rem; }
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 14px; color: var(--primary); position: relative; z-index: 1; }
+        .service-card p { color: #666; line-height: 1.7; font-size: 0.95rem; position: relative; z-index: 1; }
 
         /* WHY US */
         .why-us { padding: 80px 0; background: var(--gray-light); }
@@ -178,6 +190,14 @@
         .why-card h3 { font-size: 1.4rem; margin-bottom: 14px; }
         .why-card p { font-size: 0.95rem; line-height: 1.7; opacity: 0.92; }
 
+        /* STATS / COUNTERS */
+        .stats { padding: 80px 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); position: relative; overflow: hidden; }
+        .stats::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; z-index: 1; }
+        .stat-item { text-align: center; padding: 30px 20px; }
+        .stat-number { font-size: 3.2rem; font-weight: 900; font-family: 'Montserrat', sans-serif; margin-bottom: 8px; background: linear-gradient(135deg, var(--white), var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-label { font-size: 0.95rem; opacity: 0.85; font-weight: 500; }
+
         /* GALLERY */
         .gallery { padding: 100px 0; background: var(--white); }
         .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
@@ -188,6 +208,29 @@
         .gallery-item:hover::after { background: rgba(27,58,92,0.3); }
         .gallery-item .gallery-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; opacity: 0; transition: opacity 0.3s; color: var(--white); font-size: 1.8rem; }
         .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* LIGHTBOX */
+        .lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10001; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+        .lightbox-overlay.open { display: flex; }
+        .lightbox-overlay img { max-width: 90vw; max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); object-fit: contain; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: var(--white); font-size: 2.5rem; cursor: pointer; transition: transform 0.3s; z-index: 10002; }
+        .lightbox-close:hover { transform: scale(1.2); }
+        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; color: var(--white); font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center; }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        /* TESTIMONIALS */
+        .testimonials { padding: 100px 0; background: var(--gray-light); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .testimonial-card { background: var(--white); border-radius: 16px; padding: 40px 30px; box-shadow: 0 5px 30px rgba(27,58,92,0.06); position: relative; transition: all 0.4s; }
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(27,58,92,0.12); }
+        .testimonial-quote-icon { color: var(--accent); font-size: 2.5rem; margin-bottom: 18px; opacity: 0.3; }
+        .testimonial-text { color: #555; line-height: 1.8; font-size: 0.95rem; font-style: italic; margin-bottom: 24px; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; flex-shrink: 0; }
+        .testimonial-info h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 2px; }
+        .testimonial-info span { font-size: 0.82rem; color: #999; }
 
         /* CTA */
         .cta { padding: 80px 0; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--white); text-align: center; }
@@ -214,13 +257,38 @@
         .experience-badge .number { font-size: 2.5rem; font-weight: 900; font-family: 'Montserrat', sans-serif; display: block; }
         .experience-badge span { font-size: 0.8rem; font-weight: 600; }
 
+        /* MAP */
+        .map-container { margin-top: 40px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .map-container iframe { width: 100%; height: 280px; border: 0; }
+
         /* FOOTER */
-        .footer { background: #0A1929; color: var(--text-light); padding: 30px 0; text-align: center; }
-        .footer p { font-size: 0.85rem; opacity: 0.7; }
+        .footer { background: #0A1929; color: var(--text-light); padding: 60px 0 0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .footer-about p { color: rgba(255,255,255,0.6); line-height: 1.7; font-size: 0.9rem; margin-top: 15px; }
+        .footer-about img { height: 45px; }
+        .footer-col h4 { font-size: 1rem; color: var(--white); margin-bottom: 18px; font-family: 'Montserrat', sans-serif; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--accent-light); }
+        .footer-col ul li i { margin-right: 8px; color: var(--accent); font-size: 0.8rem; }
+        .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 1rem; transition: all 0.3s; text-decoration: none; }
+        .footer-social a:hover { background: var(--accent); color: var(--white); transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding: 20px 0; }
+        .footer-bottom p { font-size: 0.82rem; opacity: 0.5; }
+        .footer-bottom .powered { font-size: 0.72rem; opacity: 0.3; margin-top: 6px; }
 
         /* WHATSAPP FAB */
         .whatsapp-fab { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; box-shadow: 0 5px 25px rgba(37,211,102,0.4); z-index: 999; transition: transform 0.3s; text-decoration: none; }
         .whatsapp-fab:hover { transform: scale(1.1); }
+
+        /* SCROLL FADE-IN ANIMATIONS */
+        .fade-in-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-up:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in-up:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in-up:nth-child(4) { transition-delay: 0.3s; }
 
         /* ADMIN GEAR BUTTON */
         .admin-gear {
@@ -352,6 +420,9 @@
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-content h1 { font-size: 2.4rem; }
             .nav-phones { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -365,6 +436,10 @@
             .cta-phones { flex-direction: column; align-items: center; }
             .experience-badge { bottom: -10px; right: 10px; }
             .about-image { order: -1; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-number { font-size: 2.4rem; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -387,6 +462,7 @@
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="#por-que">Por Que Nosotros</a></li>
             <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
         <div class="nav-phones">
@@ -411,7 +487,20 @@
             </div>
         </div>
     </div>
+    <!-- Hero bottom wave -->
+    <div class="hero-wave">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+        </svg>
+    </div>
 </section>
+
+<!-- WAVE: hero -> services -->
+<div class="wave-divider" style="background:var(--white);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,0 C480,60 960,0 1440,40 L1440,0 L0,0 Z" fill="var(--white)"/>
+    </svg>
+</div>
 
 <!-- SERVICES -->
 <section class="services" id="servicios">
@@ -422,17 +511,17 @@
             <p data-editable="services-subtitle">Soluciones integrales para tu piscina con mas de 50 anos de experiencia</p>
         </div>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card fade-in-up">
                 <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
                 <h3 data-editable="service-title-1">Accesorios y Renovacion</h3>
                 <p data-editable="service-desc-1">Consulte por accesorios de iluminacion y limpieza. Renueve su piscina con nosotros!</p>
             </div>
-            <div class="service-card">
+            <div class="service-card fade-in-up">
                 <div class="service-icon"><i class="fas fa-wrench"></i></div>
                 <h3 data-editable="service-title-2">Reparacion</h3>
                 <p data-editable="service-desc-2">Cotice su reparacion sin costo por visita (Region Metropolitana Centro)</p>
             </div>
-            <div class="service-card">
+            <div class="service-card fade-in-up">
                 <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
                 <h3 data-editable="service-title-3">Construccion</h3>
                 <p data-editable="service-desc-3">Pida su presupuesto con nosotros! Visita en terreno sin costo (Region Metropolitana Centro)</p>
@@ -440,6 +529,13 @@
         </div>
     </div>
 </section>
+
+<!-- WAVE: services -> why-us -->
+<div class="wave-divider" style="background:var(--gray-light);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,60 C360,0 720,60 1080,20 C1260,0 1380,10 1440,20 L1440,60 L0,60 Z" fill="var(--white)"/>
+    </svg>
+</div>
 
 <!-- WHY US -->
 <section class="why-us" id="por-que">
@@ -450,20 +546,44 @@
             <p data-editable="why-subtitle">Confianza, calidad y profesionalismo en cada proyecto</p>
         </div>
         <div class="why-grid">
-            <div class="why-card blue">
+            <div class="why-card blue fade-in-up">
                 <div class="why-icon"><i class="fas fa-award"></i></div>
                 <h3 data-editable="why-card-title-1">Experiencia</h3>
                 <p data-editable="why-card-desc-1">Mas de 50 anos en el mercado avalan nuestra experiencia</p>
             </div>
-            <div class="why-card orange">
+            <div class="why-card orange fade-in-up">
                 <div class="why-icon"><i class="fas fa-rocket"></i></div>
                 <h3 data-editable="why-card-title-2">Vanguardia</h3>
                 <p data-editable="why-card-desc-2">Productos de calidad y tecnologia de vanguardia</p>
             </div>
-            <div class="why-card dark">
+            <div class="why-card dark fade-in-up">
                 <div class="why-icon"><i class="fas fa-handshake"></i></div>
                 <h3 data-editable="why-card-title-3">Servicio</h3>
                 <p data-editable="why-card-desc-3">Servicio al cliente cercano y profesional</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS / COUNTERS -->
+<section class="stats" id="estadisticas">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item fade-in-up">
+                <div class="stat-number" data-counter="50" data-suffix="+" data-editable="stat-number-1">50+</div>
+                <div class="stat-label" data-editable="stat-label-1">Anos de Experiencia</div>
+            </div>
+            <div class="stat-item fade-in-up">
+                <div class="stat-number" data-counter="500" data-suffix="+" data-editable="stat-number-2">500+</div>
+                <div class="stat-label" data-editable="stat-label-2">Proyectos Realizados</div>
+            </div>
+            <div class="stat-item fade-in-up">
+                <div class="stat-number" data-counter="100" data-suffix="%" data-editable="stat-number-3">100%</div>
+                <div class="stat-label" data-editable="stat-label-3">Garantia de Calidad</div>
+            </div>
+            <div class="stat-item fade-in-up">
+                <div class="stat-number" data-editable="stat-number-4">24/7</div>
+                <div class="stat-label" data-editable="stat-label-4">Soporte Tecnico</div>
             </div>
         </div>
     </div>
@@ -478,25 +598,85 @@
             <p data-editable="gallery-subtitle">Algunos de nuestros trabajos y proyectos realizados</p>
         </div>
         <div class="gallery-grid">
-            <div class="gallery-item">
+            <div class="gallery-item fade-in-up" onclick="openLightbox(0)">
                 <img src="images/gallery-1.jpg" alt="Equipamiento y accesorios de piscina profesional" data-editable-img="gallery-img-1" loading="lazy">
                 <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item fade-in-up" onclick="openLightbox(1)">
                 <img src="images/gallery-2.jpg" alt="Agua cristalina de piscina mantenida por Anautilus" data-editable-img="gallery-img-2" loading="lazy">
                 <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item fade-in-up" onclick="openLightbox(2)">
                 <img src="images/gallery-3.jpg" alt="Borde de piscina renovado con acabados modernos" data-editable-img="gallery-img-3" loading="lazy">
                 <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item fade-in-up" onclick="openLightbox(3)">
                 <img src="images/gallery-4.jpg" alt="Vista panoramica de piscina construida por Anautilus" data-editable-img="gallery-img-4" loading="lazy">
                 <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- WAVE: gallery -> testimonials -->
+<div class="wave-divider" style="background:var(--gray-light);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,60 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="var(--white)"/>
+    </svg>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonios">
+    <div class="container">
+        <div class="section-title">
+            <div class="accent-line"></div>
+            <h2 data-editable="testimonials-title">Lo Que Dicen Nuestros Clientes</h2>
+            <p data-editable="testimonials-subtitle">La satisfaccion de nuestros clientes es nuestra mayor recompensa</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in-up">
+                <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p class="testimonial-text" data-editable="testimonial-text-1">Excelente servicio. Repararon nuestra piscina en tiempo record y quedo como nueva. Muy profesionales y con precios justos. Los recomiendo totalmente.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">M</div>
+                    <div class="testimonial-info">
+                        <h4 data-editable="testimonial-name-1">Maria Gonzalez</h4>
+                        <span data-editable="testimonial-location-1">Las Condes, Santiago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-up">
+                <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p class="testimonial-text" data-editable="testimonial-text-2">Construyeron nuestra piscina desde cero y el resultado fue espectacular. Gran equipo de trabajo, siempre atentos a los detalles y cumpliendo con los plazos.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">R</div>
+                    <div class="testimonial-info">
+                        <h4 data-editable="testimonial-name-2">Roberto Muoz</h4>
+                        <span data-editable="testimonial-location-2">Providencia, Santiago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-up">
+                <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p class="testimonial-text" data-editable="testimonial-text-3">Llevamos anos con el servicio de mantenimiento de Anautilus y estamos muy contentos. Siempre puntuales, responsables y con un trato muy amable.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">C</div>
+                    <div class="testimonial-info">
+                        <h4 data-editable="testimonial-name-3">Carolina Fuentes</h4>
+                        <span data-editable="testimonial-location-3">Vitacura, Santiago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WAVE: testimonials -> cta -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,0 C360,60 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,60 L0,60 Z" fill="var(--gray-light)"/>
+    </svg>
+</div>
 
 <!-- CTA -->
 <section class="cta">
@@ -510,6 +690,13 @@
         </div>
     </div>
 </section>
+
+<!-- WAVE: cta -> about -->
+<div class="wave-divider" style="background: linear-gradient(135deg, var(--primary), #0D2137);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,60 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="var(--accent)"/>
+    </svg>
+</div>
 
 <!-- ABOUT / CONTACT -->
 <section class="about-contact" id="contacto">
@@ -538,6 +725,10 @@
                         <a href="tel:+56226836525" data-editable="contact-phone2">+56 2 2683 6525</a>
                     </div>
                 </div>
+                <!-- Google Maps -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.0!2d-70.6693!3d-33.4489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDI2JzU2LjAiUyA3MMKwNDAnMDkuNSJX!5e0!3m2!1ses!2scl!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
             <div class="about-image">
                 <img src="images/footer-bg.jpg" alt="Escalera de piscina con agua cristalina - Anautilus servicio profesional" data-editable-img="about-image">
@@ -553,9 +744,51 @@
 <!-- FOOTER -->
 <footer class="footer">
     <div class="container">
-        <p data-editable="footer-text">&copy; 2025 Anautilus - Reparacion, Construccion y Mantenimiento de Piscinas. Todos los derechos reservados.</p>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <img src="images/logo.png" alt="Anautilus" data-editable-img="logo">
+                <p data-editable="footer-about-text">Anautilus es una empresa dedicada a la reparacion, construccion y mantenimiento de piscinas en Santiago, Chile. Mas de 50 anos de experiencia nos respaldan.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/+56984421734" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:danieltobarsalazar@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces Rapidos</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                    <li><a href="#galeria"><i class="fas fa-chevron-right"></i> Galeria</a></li>
+                    <li><a href="#testimonios"><i class="fas fa-chevron-right"></i> Testimonios</a></li>
+                    <li><a href="#contacto"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="tel:+56984421734"><i class="fas fa-mobile-alt"></i> +56 9 8442 1734</a></li>
+                    <li><a href="tel:+56226836525"><i class="fas fa-phone"></i> +56 2 2683 6525</a></li>
+                    <li><a href="mailto:danieltobarsalazar@gmail.com"><i class="fas fa-envelope"></i> Email</a></li>
+                    <li><a href="https://maps.google.com/?q=Abate+Molina+893+Santiago" target="_blank"><i class="fas fa-map-marker-alt"></i> Abate Molina 893</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-editable="footer-text">&copy; 2025 Anautilus - Reparacion, Construccion y Mantenimiento de Piscinas. Todos los derechos reservados.</p>
+            <p class="powered">Powered by Inithex</p>
+        </div>
     </div>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(event, -1)"><i class="fas fa-chevron-left"></i></button>
+    <img id="lightboxImg" src="" alt="Imagen ampliada">
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(event, 1)"><i class="fas fa-chevron-right"></i></button>
+</div>
 
 <!-- WHATSAPP FAB -->
 <a href="https://wa.me/+56984421734" target="_blank" class="whatsapp-fab" aria-label="Contactar por WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -652,7 +885,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         document.getElementById('navLinks').classList.remove('open');
     });
 });
-const sectionIds = ['home','servicios','por-que','galeria','contacto'];
+const sectionIds = ['home','servicios','por-que','estadisticas','galeria','testimonios','contacto'];
 window.addEventListener('scroll', () => {
     const sp = window.scrollY + 200;
     sectionIds.forEach(id => {
@@ -660,6 +893,78 @@ window.addEventListener('scroll', () => {
         if (s && s.offsetTop <= sp && s.offsetTop + s.offsetHeight > sp)
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+id));
     });
+});
+
+// ===================== SCROLL FADE-IN ANIMATIONS =====================
+const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in-up').forEach(el => fadeObserver.observe(el));
+
+// ===================== ANIMATED COUNTERS =====================
+let countersAnimated = false;
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+            countersAnimated = true;
+            document.querySelectorAll('[data-counter]').forEach(el => {
+                const target = parseInt(el.dataset.counter);
+                const suffix = el.dataset.suffix || '';
+                let current = 0;
+                const increment = Math.ceil(target / 60);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current + suffix;
+                }, 25);
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+const statsSection = document.querySelector('.stats');
+if (statsSection) counterObserver.observe(statsSection);
+
+// ===================== LIGHTBOX =====================
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function openLightbox(index) {
+    const imgs = document.querySelectorAll('.gallery-item img');
+    lightboxImages = Array.from(imgs).map(img => img.src);
+    lightboxIndex = index;
+    document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+    document.getElementById('lightboxOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+    if (e.target === document.getElementById('lightboxOverlay') || e.target.closest('.lightbox-close')) {
+        document.getElementById('lightboxOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+
+function navLightbox(e, direction) {
+    e.stopPropagation();
+    lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+    document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+}
+
+document.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowLeft') navLightbox(e, -1);
+    if (e.key === 'ArrowRight') navLightbox(e, 1);
 });
 
 // ===================== ADMIN PANEL =====================
@@ -700,6 +1005,15 @@ const adminConfig = {
             ]};
         })),
     ]},
+    estadisticas: { label: 'Estadisticas', icon: 'fa-chart-bar', groups: [
+        ...([1,2,3,4].map(i => {
+            const names = ['Experiencia','Proyectos','Garantia','Soporte'];
+            return { title: names[i-1], icon:'fa-hashtag', fields:[
+                { key:`stat-number-${i}`, label:'Numero', type:'text' },
+                { key:`stat-label-${i}`, label:'Etiqueta', type:'text' },
+            ]};
+        })),
+    ]},
     galeria: { label: 'Galeria', icon: 'fa-images', groups: [
         { title: 'Seccion', icon: 'fa-heading', fields: [
             { key:'gallery-title', label:'Titulo', type:'text' },
@@ -708,6 +1022,20 @@ const adminConfig = {
         ...([1,2,3,4].map(i => {
             return { title: `Imagen ${i}`, icon:'fa-image', fields:[
                 { key:`img_gallery-img-${i}`, label:`Imagen ${i}`, type:'image' },
+            ]};
+        })),
+    ]},
+    testimonios: { label: 'Testimonios', icon: 'fa-comments', groups: [
+        { title: 'Seccion', icon: 'fa-heading', fields: [
+            { key:'testimonials-title', label:'Titulo', type:'text' },
+            { key:'testimonials-subtitle', label:'Subtitulo', type:'text' },
+        ]},
+        ...([1,2,3].map(i => {
+            const names = ['Testimonio 1','Testimonio 2','Testimonio 3'];
+            return { title: names[i-1], icon:'fa-quote-left', fields:[
+                { key:`testimonial-text-${i}`, label:'Texto', type:'textarea' },
+                { key:`testimonial-name-${i}`, label:'Nombre', type:'text' },
+                { key:`testimonial-location-${i}`, label:'Ubicacion', type:'text' },
             ]};
         })),
     ]},
@@ -745,7 +1073,8 @@ const adminConfig = {
             { key:'nav-phone2', label:'Fijo', type:'text' },
         ]},
         { title: 'Footer', icon: 'fa-copyright', fields: [
-            { key:'footer-text', label:'Texto', type:'text' },
+            { key:'footer-text', label:'Texto Copyright', type:'text' },
+            { key:'footer-about-text', label:'Texto Footer', type:'textarea' },
         ]},
     ]},
 };

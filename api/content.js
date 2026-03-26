@@ -1,10 +1,17 @@
-import { put, list, head } from '@vercel/blob';
+import { put, list } from '@vercel/blob';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const BLOB_NAME = 'site-content.json';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'reflex2025';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'anautilus2025';
 
 // Load default data
-import defaultData from '../data.default.json' assert { type: 'json' };
+let defaultData = {};
+try {
+  defaultData = JSON.parse(readFileSync(join(process.cwd(), 'data.default.json'), 'utf-8'));
+} catch (e) {
+  defaultData = {};
+}
 
 async function getBlobUrl() {
   try {
